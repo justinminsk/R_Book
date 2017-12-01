@@ -16,7 +16,7 @@
 
 @
 
-<<>>=
+<<child="Children/Halloween_Article.Rnw">>=
 
 @
 
