@@ -3,7 +3,7 @@
 !.gitignore
 !Book.Rnw
 !Children/
-!Test_Book.R
+!Book.pdf
 
 Children/*
 !*.Rnw
