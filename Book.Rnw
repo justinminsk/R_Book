@@ -4,7 +4,7 @@
 \makeindex
 
 \begin{document}
-\title{R: dplyr, Lahmen, and ggplot}
+\title{Halloween Books Book}
 \date{}
 \author{Justin Minsk \and Andrew Innes \and Jerrin Varghese}
 \maketitle
