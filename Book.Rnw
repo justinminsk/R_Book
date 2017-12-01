@@ -1,0 +1,25 @@
+\documentclass{book}
+
+\usepackage{makeidx}
+\makeindex
+
+\begin{document}
+\title{R: dplyr, Lahmen, and ggplot}
+\date{}
+\author{Justin Minsk \and Andrew Innes \and Jerrin Varghese}
+\maketitle
+
+\tableofcontents
+
+
+<<>>=
+
+@
+
+<<>>=
+
+@
+
+\printindex
+
+\end{document}
