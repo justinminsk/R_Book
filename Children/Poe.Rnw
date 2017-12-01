@@ -1,19 +1,12 @@
-\documentclass{article}
-\usepackage{natbib}
-\begin{document}
-
-\title{A Look at Poe's Work}
-\author{Justin David Minsk}
-\maketitle
+\chapter{Poe}
 
 <<echo=FALSE>>=
 packages <- c('dplyr', 'stringr', 'tidytext', 'tm', 'wordcloud')
 knitr::write_bib(packages,file = 'packages.bib')
 @
 
-\begin{abstract}
+
 Edgar Allen Poe is a well known short story and poem writer that tended to write poems in the horror genre such as "The Raven", "The Cask of Amontillado", "The Tell-Tale Heart", and many other horror fan's favorites. The purpose of this paper is to look at the book, "The Complete Poetical Works Of Edgar Allen Poe" and find the most used words in his poetical works, just in time for Halloween.
-\end{abstract}
 
 \section{"The Complete Poetical Works Of Edgar Allen Poe"}
 The first task is to get "The Complete Poetical Works Of Edgar Allen Poe" into R to be able to mine the text. First we need the libraries that we will use to mine the text.
@@ -90,8 +83,3 @@ Now we can create a wordcloud, a good visual representation of the most common w
 wordcloud(words_free$word, words_free$count, min.freq = 25)
 #make a word cloud
 @
-
-\bibliographystyle{apa}
-\bibliography{bib}
-\nocite{*}
-\end{document}

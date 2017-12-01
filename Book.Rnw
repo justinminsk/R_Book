@@ -12,13 +12,18 @@
 \tableofcontents
 
 
-<<>>=
+<<child="Children/Poe.Rnw">>=
 
 @
 
 <<>>=
 
 @
+
+<<>>=
+
+@
+
 
 \printindex
 
