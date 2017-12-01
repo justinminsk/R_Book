@@ -20,7 +20,7 @@
 
 @
 
-<<>>=
+<<child="Children/Romeo&Juliet.Rnw">>=
 
 @
 
