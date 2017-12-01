@@ -1,0 +1,96 @@
+\chapter{Romeo And Juliet}
+
+<<echo=FALSE>>=
+  packages<-c('dplyr','stringr','tidytext','tm','janeaustenr','wordcloud','wordcloud2')
+  @
+    
+    
+
+In this article we are constructing a wordcloud using the tidytext R package.
+Here we will be taking the words from the famous book Romeo and Juliets written by shakespear.
+We will extract all the words and convert it to a cloud of words in different shape and colurs using the package wordcloud.
+  
+  
+\section{Romeo and Juliet}
+is a tragic love story written by  William Shakespeare early in his career.
+  
+\section {The Gutenberg Package}
+This is a relatively new package for R,Gutenberg , that gives one access to all of the novels written by different authors.
+  
+  <<warning=FALSE,message=FALSE>>=
+  library(janeaustenr)
+  library(dplyr)
+  library(tidytext)
+  library(gutenbergr)
+  library(wordcloud)
+  library(ggplot2)
+  library(stringr)
+  library(knitr)
+  @
+    
+    
+Let's find the book for Romeo and Juliets by shakespear using gutenberg.
+  
+  <<>>=
+  gutenberg_works(str_detect(title,'Romeo'))
+  @
+  
+Let's now download and store it into a data frame.
+  
+  <<warning=FALSE,message=FALSE>>=
+    Romeo<-gutenberg_download(1513)
+  @
+    
+    
+\section {Some Data Cleaning}
+  
+  Adding a new column of line to get the line numbers and clean the id to Null.
+  
+  <<>>=
+  Romeo$line<-1:5268
+  Romeo$gutenberg_id<-NULL
+  @
+    
+  
+\section{The wordcloud}
+To make the word cloud, we first need to break up the lines into words. We can use the function from package tidytext for this.
+  
+  <<>>=
+    Romeo_words<-Romeo%>%
+    unnest_tokens(word,text)
+  @
+    
+We can remove common, unimportant words with the stop\_words from the data frame with dplyr.
+  <<>>=
+    Romeo_words<-Romeo_words%>%
+    filter(!(word %in% stop_words$word))
+  @
+    
+    
+Since this is a tragic love story, so lets only take the joy and sadness word sentiments out of it.
+  
+  <<>>=
+  nrc<-get_sentiments('nrc')
+  joy_sad<-nrc%>%
+  filter(sentiment == 'joy' | sentiment == 'sadness')
+  @
+    
+Lets takeout all the joy and sadness words to a dataframe.
+  
+  <<warning=FALSE,message=FALSE>>=
+    Romeo_joy_sad<-inner_join(Romeo_words,joy_sad)
+  @
+    
+Now we need to calculate frequencies of the words in the novel.  Again, we can use standard techniques for this:
+    
+    <<>>=
+    Romeo_frequency<-Romeo_joy_sad%>%
+    group_by(word)%>%
+    summarise(frequency = n())
+  @
+    
+Finally lets view our wordcloud.
+  
+  <<>>=
+    wordcloud(Romeo_frequency$word,Romeo_frequency$frequency)
+  @
